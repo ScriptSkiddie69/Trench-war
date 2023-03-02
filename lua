@@ -86,7 +86,6 @@ end)()
 
 
 local Notif = library:InitNotifications()
-
 for i = 20,0,-1 do 
     task.wait(0.05)
     local LoadingXSX = Notif:Notify("Loading pecter.lua please be patient.", 3, "information") -- notification, alert, error, success, information
@@ -458,7 +457,7 @@ for _, player in pairs(Players:GetPlayers()) do
 }
 
 game:GetService("ReplicatedStorage").GlobalEvents.Effects.SendDamage:FireServer(unpack(args))
-                
+                Notif:Notify("KillAura Curret Target : "..nearestPlayer.Name,1)
             end
 		end
         end
