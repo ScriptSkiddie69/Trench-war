@@ -55,9 +55,9 @@ game.Players.PlayerAdded:Connect(function(v)
         game:GetService("RunService").RenderStepped:Connect(function()
             if v.Character ~= nil and v.Character:FindFirstChild("Humanoid") ~= nil and v.Character:FindFirstChild("HumanoidRootPart") ~= nil and v ~= localPlayer and v.Character.Humanoid.Health > 0 then
                 local Vector, OnScreen = camera:worldToViewportPoint(v.Character.HumanoidRootPart.Position)
-
+ local m,y = camera:worldToViewportPoint(mouse.Hit.Position)
                 if OnScreen then
-                    Tracer.From = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
+                    Tracer.From = Vector2.new(m.X,m.Y)
                     Tracer.To = Vector2.new(Vector.X, Vector.Y)
                     Tracer.Color = v.TeamColor.Color
                     Tracer.Visible = tracer
@@ -467,9 +467,30 @@ end
 end):AddKeybind(Enum.KeyCode.RightControl)
 local main = player:NewSection("Main")
 local Bhop = 100
-
+local ws = 50
+local jp = 50
+local Slider1 = player:NewSlider("Walk speed", "", true, "/", {min = 1, max = 400, default = 50}, function(value)
+	ws = value
+end)
+local Slider1 = player:NewSlider("Jump power", "", true, "/", {min = 1, max = 400, default = 50}, function(value)
+	jp = value
+end)
 local Slider1 = player:NewSlider("bhop speed", "", true, "/", {min = 1, max = 1000, default = 100}, function(value)
 	Bhop = value
+end)
+local Toggle1 = player:NewToggle("WalkSpeed", false, function(value)
+	getgenv().value = value
+	while getgenv().value do
+		wait()
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = ws
+end
+end)
+local Toggle1 = player:NewToggle("JumpPower", false, function(value)
+	getgenv().value = value
+	while getgenv().value do
+		wait()
+	game.Players.LocalPlayer.Character.Humanoid.JumpPower = jp
+end
 end)
 local Toggle1 = player:NewToggle("Bhop", false, function(value)
 	getgenv().toggle = value
