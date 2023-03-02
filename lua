@@ -551,6 +551,26 @@ if getgenv().check then
 			end
 		end
 end):AddKeybind(Enum.KeyCode.P)
+local Toggle1 = player:NewToggle("Part Clone", false, function(value)
+	getgenv().val = value
+	while getgenv().val do
+		wait()
+		for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+				local args = {
+    [1] =game.Players.LocalPlayer.Character
+}
+v:FireServer(unpack(args))
+				
+		end
+		end
+	end
+end):AddKeybind(Enum.KeyCode.L)
 local fov = 70
 local Slider1 = visual:NewSlider("FOV", "", true, "/", {min = 70, max = 140, default = 70}, function(value)
 fov = value
