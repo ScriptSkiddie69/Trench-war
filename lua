@@ -71,6 +71,15 @@ game.Players.PlayerAdded:Connect(function(v)
 	end
     coroutine.wrap(lineesp)()
 end)
+	local function hit()
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://5043539486"
+		sound.Volume = 1
+		sound.Parent = game:GetService('SoundService')
+		sound:Play()
+		repeat wait() until sound.IsPlaying == false;
+		sound:Destroy()
+	end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
 
 
@@ -457,8 +466,17 @@ for _, player in pairs(Players:GetPlayers()) do
 }
 
 game:GetService("ReplicatedStorage").GlobalEvents.Effects.SendDamage:FireServer(unpack(args))
-                Notif:Notify("KillAura Curret Target : "..nearestPlayer.Name,1)
+		local sound = Instance.new("Sound")
+		sound.SoundId = "rbxassetid://5043539486"
+		sound.Volume = 1
+		sound.Parent = game:GetService('SoundService')
+		sound:Play()
+		Notif:Notify("KillAura Curret Target : "..nearestPlayer.Name,0.4)
+		    if sound.IsPlaying == "false" then
+    	sound:Destroy()
+	end
             end
+            
 		end
         end
 	end
@@ -629,6 +647,16 @@ function GetPlayer(String)
     end
     return plr
 end
+local debounce = true
+game:GetService('UserInputService').JumpRequest:Connect(function()
+	if debounce then
+		debounce = false
+    game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+    wait(0.35)
+    debounce = true
+end
+end)
+
 for i = 1,10 do
 local FinishedLoading = Notif:Notify("Pecter.lua loaded", 4, "success")
 end
