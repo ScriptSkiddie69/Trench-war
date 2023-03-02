@@ -110,7 +110,6 @@ local main = Init:NewTab("Main")
 local combat = Init:NewTab("Combat")
 local player = Init:NewTab("Player")
 local visual = Init:NewTab("Visual")
-local setting = Init:NewTab("Settings")
 local trolls = main:NewSection("Trolling")
 local e = main:NewButton("Play plane pass by", function()
 	for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
