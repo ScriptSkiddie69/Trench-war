@@ -433,7 +433,7 @@ local Button1 = main:NewButton("Change basepart transparency", function()
 			end
 end)
 local Main = combat:NewSection("Main")
-local Slider1 = combat:NewSlider("KillAura Distance", "", true, "/", {min = 1, max = 1000, default = 0}, function(value)
+local Slider1 = combat:NewSlider("KillAura Distance", "", true, "/", {min = 1, max = 50, default = 30}, function(value)
     setting.distance = value
 end)
 local killAura = combat:NewToggle("KillAura", false, function(value)
@@ -646,6 +646,67 @@ function GetPlayer(String)
     end
     return plr
 end
+local lifetime = 3
+local material = Enum.Material.ForceField
+local thickness = 0.1
+local color = Color3.fromRGB(255,0,0)
+
+local mt = getrawmetatable(game)
+local old = mt.__namecall
+local lp = game:GetService("Players").LocalPlayer
+local rs = game:GetService("RunService").RenderStepped
+local lasthittick = tick()
+function createBeam(p1, p2)
+	local beam = Instance.new("Part", workspace)
+	beam.Anchored = true
+	beam.CanCollide = false
+	beam.Material = material
+	beam.Color = color
+	beam.Size = Vector3.new(thickness, thickness, (p1 - p2).magnitude)
+	beam.CFrame = CFrame.new(p1, p2) * CFrame.new(0, 0, -beam.Size.Z / 2)
+	return beam
+end
+
+setreadonly(mt, false)
+mt.__namecall = newcclosure(function(self, ...)
+	local args = {...}
+	if getnamecallmethod() == "FireServer" and self.Name == "SendDamage" and tick() - lasthittick > 0.005 then
+		lasthittick = tick()
+		spawn(function()
+			local beam = createBeam(lp.Character.Head.CFrame.p, args[3].Position	)
+			for i = 1, 60 * lifetime do
+				rs:Wait()
+				beam.Transparency = i / (60 * lifetime)
+			end
+			beam:Destroy()
+		end)
+	end
+	return old(self, ...)
+end)
+setreadonly(mt, true)
+local mt = getrawmetatable(game)
+local old = mt.__namecall
+local lp = game:GetService("Players").LocalPlayer
+local rs = game:GetService("RunService").RenderStepped
+local lasthittick = tick()
+
+setreadonly(mt, false)
+mt.__namecall = newcclosure(function(self, ...)
+	local args = {...}
+	if getnamecallmethod() == "FireServer" and self.Name == "HitEffects" and tick() - lasthittick > 0.005 then
+		lasthittick = tick()
+		spawn(function()
+			local beam = createBeam(lp.Character.Head.CFrame.p, args[1]	)
+			for i = 1, 60 * lifetime do
+				rs:Wait()
+				beam.Transparency = i / (60 * lifetime)
+			end
+			beam:Destroy()
+		end)
+	end
+	return old(self, ...)
+end)
+setreadonly(mt, true)
 local debounce = true
 game:GetService('UserInputService').JumpRequest:Connect(function()
 	if debounce then
