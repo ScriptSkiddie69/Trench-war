@@ -104,6 +104,76 @@ local player = Init:NewTab("Player")
 local visual = Init:NewTab("Visual")
 local setting = Init:NewTab("Settings")
 local trolls = main:NewSection("Trolling")
+local e = main:NewButton("Play plane pass by", function()
+	for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+		for i = 1,2 do
+				local args = {
+    [1] =game:GetService("ReplicatedStorage").ArtilleryReplicated.CannonBallPass["cb_incoming_3_highvelocity"]
+}
+v:FireServer(unpack(args))
+				
+			end
+		end
+		end
+end)
+local e = main:NewButton("Play friendly violin", function()
+	for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+				local args = {
+    [1] =game:GetService("ReplicatedStorage").ViolinSongs.Violin["Slovakian Folk"]
+}
+v:FireServer(unpack(args))
+				
+			end
+		end
+end)
+local e = main:NewButton("Moan shit", function()
+	for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+		for i = 1,99 do
+				local args = {
+    [1] =game:GetService("ReplicatedStorage").Injured
+}
+v:FireServer(unpack(args))
+				
+			end
+		end
+		end
+end)
+local outro = main:NewButton("Earth Outro", function()
+	for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+		for i = 1,99 do
+				local args = {
+    [1] = game:GetService("ReplicatedStorage").ViolinSongs.Violin["A Little Night Music"]
+}
+v:FireServer(unpack(args))
+				
+			end
+		end
+		end
+end)
 local Toggle1 = main:NewToggle("Spam chat", false, function(value)
 	getgenv().loop = value
 while getgenv().loop do
@@ -174,6 +244,143 @@ end
 }
 
 game:GetService("ReplicatedStorage").GlobalEvents.Effects.SendDamage:FireServer(unpack(args))
+end
+end)
+local Button = main:NewButton("Kill target works on team too", function()
+	if setting.target3 == "all" or setting.target3 == "All" or setting.target3 == "ALL" then
+			for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+		for i,r in pairs(game.Players:GetPlayers()) do
+			for i,t in pairs(r.Character:GetDescendants()) do
+			if t:IsA('BasePart') then
+			local args = {
+    [1] = t
+}
+v:FireServer(unpack(args))
+				
+			end
+		end
+	end
+end
+end
+	else
+	for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+		for i,e in pairs(GetPlayer(setting.target3).Character:GetDescendants()) do
+			if e:IsA('BasePart') then
+			local args = {
+    [1] = e
+}
+v:FireServer(unpack(args))
+				
+			end
+		end
+	end
+end
+end
+end)
+local fling = main:NewButton("Fling target", function()
+    	if setting.target3 == "all" or setting.target3 == "All" or setting.target3 == "ALL" then
+			for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+		for i,r in pairs(game.Players:GetPlayers()) do
+			for i,t in pairs(r.Character:GetChildren()) do
+			if t.Name == "Humanoid" then
+				for i = 1,4 do
+			local args = {
+    [1] = t
+}
+v:FireServer(unpack(args))
+				
+			end
+		end
+		end
+	end
+end
+end
+	else
+	for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+		for i,e in pairs(GetPlayer(setting.target3).Character:GetChildren()) do
+			if e.Name == "Humanoid" then
+				for i = 1,4 do
+			local args = {
+    [1] = e
+}
+v:FireServer(unpack(args))
+				
+			end
+		end
+	end
+end
+end
+end
+end)
+local fling = main:NewButton("Slow target", function()
+    	if setting.target3 == "all" or setting.target3 == "All" or setting.target3 == "ALL" then
+			for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+		for i,r in pairs(game.Players:GetPlayers()) do
+			for i,t in pairs(r.Character:GetChildren()) do
+			if t.Name == "Humanoid" then
+				for i = 1,3 do
+			local args = {
+    [1] = t
+}
+v:FireServer(unpack(args))
+				
+			end
+		end
+		end
+	end
+end
+end
+	else
+	for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+		for i,e in pairs(GetPlayer(setting.target3).Character:GetChildren()) do
+			if e.Name == "Humanoid" then
+				for i = 1,3 do
+			local args = {
+    [1] = e
+}
+v:FireServer(unpack(args))
+				
+			end
+		end
+	end
+end
+end
 end
 end)
 local target = main:NewTextbox("Target", "", "all", "all", "medium", true, false, function(plr)
@@ -362,8 +569,6 @@ local vis = visual:NewSection("Visuals")
 local Toggle1 = visual:NewToggle("Trace people", false, function(value)
 tracer = value
 end)
-
-local FinishedLoading = Notif:Notify("Pecter.lua loaded", 4, "success")
 function GetPlayer(String)
     local plr
     local strl = String:lower()
@@ -383,4 +588,7 @@ function GetPlayer(String)
         end
     end
     return plr
+end
+for i = 1,10 do
+local FinishedLoading = Notif:Notify("Pecter.lua loaded", 4, "success")
 end
