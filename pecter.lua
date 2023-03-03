@@ -145,6 +145,24 @@ v:FireServer(unpack(args))
 			end
 		end
 end)
+local e = main:NewButton("Earrape the fuck out of people", function()
+	for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if k:IsA('Tool') then
+		k.Parent = game.Players.LocalPlayer.Character
+	end
+end
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+	if v.Name == "PlaySound" then
+		for i = 1,99 do
+				local args = {
+    [1] =game:GetService("SoundService").EarRinging
+}
+v:FireServer(unpack(args))
+				
+			end
+		end
+		end
+end)
 local e = main:NewButton("Moan shit", function()
 	for i,k in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 	if k:IsA('Tool') then
@@ -187,7 +205,7 @@ while getgenv().loop do
 			wait(2)
 			local rm = math.random(1,5)
 			local Chat = "You 🐒🏳️‍🌈  Stay mad 😡😡cope harder 😂 You 🐒🏳️‍🌈  Stay mad 😡😡cope harder 😂 You 🐒🏳️‍🌈  Stay mad 😡😡cope harder 😂 You 🐒🏳️‍🌈  Stay mad 😡😡cope harder 😂  "
-			local Chat2 = "Did you know this text is empty?, Stop reading this"
+			local Chat2 = "gg/heWZKJKtxQ Pecter.lua server! gg/heWZKJKtxQ Pecter.lua server! gg/heWZKJKtxQ Pecter.lua server! gg/heWZKJKtxQ Pecter.lua server! gg/heWZKJKtxQ Pecter.lua server! gg/heWZKJKtxQ Pecter.lua server!"
 			local Chat3 = "i Stay winning 🎖️🥇🏅 and you 🤘 stay losing 🏳️‍🌈 i ☺️ stay winning 🎖️🥇🏅 i Stay winning 🎖️🥇🏅 and you 🤘 stay losing 🏳️‍🌈 i ☺️ stay winning 🎖️🥇🏅"
 			local Chat4 = "How can 1 person 😡 makes you ☺️🤘 so mad 😠 how can 1 person 😡 makes u so madHow can 1 person 😡 makes you ☺️🤘 so mad 😠 how can 1 person 😡 makes u so mad "
 			local Chat5 = "Pecter.lua stay winning 👑👑🎖️🥇 Pecter.lua stay winning 👑👑🎖️🥇 Pecter.lua stay winning 👑👑🎖️🥇 Pecter.lua stay winning 👑👑🎖️🥇 Pecter.lua stay winning 👑👑🎖️🥇 Pecter.lua stay winning 👑👑🎖️🥇 "
@@ -396,6 +414,59 @@ end)
 local transparency = main:NewTextbox("Change Transparency", "", "Type any transperancy between 0.1 to 1", "all", "medium", true, false, function(val)
 	setting.transparency = val
 end)
+local Toggle1 = main:NewToggle("Invisible team", false, function(value)
+if value then
+		for i,r in ipairs(game.Players:GetPlayers()) do
+			for i,t in ipairs(r.Character:GetDescendants()) do
+			if t:IsA('BasePart') and r.Team == game.Players.LocalPlayer.Team then
+			local args = {
+    [1] = r.Character,
+    [2] = 1
+}
+game:GetService('ReplicatedStorage'):FindFirstChild('ChangeTransparency'):FireServer(unpack(args))
+				
+			end
+		end
+	end
+else
+		for i,r in ipairs(game.Players:GetPlayers()) do
+			for i,t in ipairs(r.Character:GetDescendants()) do
+			if t:IsA('BasePart') and r.Team == game.Players.LocalPlayer.Team then
+			local args = {
+    [1] = r.Character,
+    [2] = 0
+}
+game:GetService('ReplicatedStorage'):FindFirstChild('ChangeTransparency'):FireServer(unpack(args))
+				
+			end
+		end
+	end
+end
+end):AddKeybind(Enum.KeyCode.L)
+local Toggle1 = main:NewToggle("Invisible bridge", false, function(value)
+	if value then
+			for i,t in ipairs(game:GetService("Workspace").Bridge:GetDescendants()) do
+			if t:IsA('BasePart') then
+			local args = {
+    [1] = t,
+    [2] = 1
+}
+game:GetService('ReplicatedStorage'):FindFirstChild('ChangeTransparency'):FireServer(unpack(args))
+				
+			end
+		end
+else
+			for i,t in ipairs(game:GetService("Workspace").Bridge:GetDescendants()) do
+			if t:IsA('BasePart') then
+			local args = {
+    [1] = t,
+    [2] = 0
+}
+game:GetService('ReplicatedStorage'):FindFirstChild('ChangeTransparency'):FireServer(unpack(args))
+	end
+end
+end
+end)
 local Change = main:NewButton("Change target transparency", function()
 	if setting.player == "All" or setting.player == "ALL" or setting.player == "all" then
 					for i,v in pairs(game.Players:GetPlayers()) do
@@ -482,6 +553,61 @@ game:GetService("ReplicatedStorage").GlobalEvents.Effects.SendDamage:FireServer(
     end)
 end
 end):AddKeybind(Enum.KeyCode.RightControl)
+local SilentAim = combat:NewToggle("Silent Aim Near Mouse", false, function(value)
+	getgenv().yes = value
+	        	local players = game:GetService("Players")
+	local plr = players.LocalPlayer
+	local mouse = plr:GetMouse()
+	local camera = game.Workspace.CurrentCamera
+	
+local function ClosestPlayerToMouse()
+    local target = nil
+    local dist = math.huge
+for i,v in pairs(players:GetPlayers()) do
+    if v.Name ~= plr.Name then
+        if v.Character and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("HumanoidRootPart") and v.TeamColor ~= plr.TeamColor then
+            local screenpoint = camera:WorldToScreenPoint(v.Character.HumanoidRootPart.Position)
+					local check = (Vector2.new(mouse.X,mouse.Y)-Vector2.new(screenpoint.X,screenpoint.Y)).magnitude
+
+            if check < dist then
+                target  = v
+                dist = check
+            end
+        end
+    end
+end
+
+return target 
+end
+	
+        if ClosestPlayerToMouse().Character ~= nil and
+        ClosestPlayerToMouse().Character:FindFirstChild("HumanoidRootPart") and
+        ClosestPlayerToMouse().Character:FindFirstChild("Humanoid") and
+        ClosestPlayerToMouse().Character:FindFirstChild("Humanoid").Health > 0 then
+local mt = getrawmetatable(game)
+local old = mt.__namecall
+local lp = game:GetService("Players").LocalPlayer
+local rs = game:GetService("RunService").RenderStepped
+local lasthittick = tick()
+setreadonly(mt, false)
+mt.__namecall = newcclosure(function(self, ...)
+	local args = {...}
+	if getgenv().yes and getnamecallmethod() == "FireServer" and self.Name == "HitEffects" and tick() - lasthittick > 0.005 then
+		                    					local args = {
+    [1] = ClosestPlayerToMouse().Name,
+    [2] = ClosestPlayerToMouse().Character.Humanoid,
+    [3] = ClosestPlayerToMouse().Character.Head,
+    [4] = ClosestPlayerToMouse().Character.Head.Position,
+    [5] = 100
+}
+
+game:GetService("ReplicatedStorage").GlobalEvents.Effects.SendDamage:FireServer(unpack(args))
+end
+	return old(self, ...)
+end) 
+	setreadonly(mt, true) 
+        end
+end)
 local main = player:NewSection("Main")
 local Bhop = 100
 local ws = 50
